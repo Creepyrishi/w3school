@@ -12,4 +12,5 @@ Project for w3school event project
 
 <li>Get API key from <a href='https://developers.themoviedb.org/3/getting-started/introduction'>The Movie Database V3</a></li>
 <li>Put api key into '.env' file you just create. Add like shown in '.env.example'</li>
+<li>Remove space and quote marks before putting API key in to '.env'</li>
 </ol>
