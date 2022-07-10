@@ -38,6 +38,22 @@
         {% endfor %}
         <a href="/trending" class="taketopage">Trending <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="latest"></div>
+    <div class="headTitle">
+        <h2> <span class="title-word title-word-1">Discover</span></h2>
+    </div>
+    <div class="discover">
+        {% for item in discover %}
+        <a href="/ShowMovie/{{item['id']}}">
+            <div class="discoverCard">
+                <img src="{{item['poster']}}" alt="poster" class="trendingCard" id="{{item['id']}}">
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="pageBTNcontiainer">
+    <button onclick="window.location.href='/page-'" class="pageBTN"><i class="fa-solid fa-arrow-left"></i></button>
+    <p>{{page}}</p>
+    <button onclick="window.location.href='/page+'" class="pageBTN"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
 </div>
 {% endblock %}

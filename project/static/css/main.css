@@ -96,7 +96,7 @@ input[type="text"]{
 /* scrolbar  */
 ::-webkit-scrollbar{
     width: .5rem;
-    height: .3rem;
+    height: .5rem;
 }
 ::-webkit-scrollbar-track{
     border-radius: 100vw;
@@ -200,7 +200,7 @@ margin: 1rem;
     margin: auto .4rem;
     border-radius: 8px;
 }
-.card:hover{
+.card:hover ,.discoverCard:hover    {
     border: .08rem solid rgb(255, 255, 255);
 }
 h2{
@@ -225,4 +225,36 @@ h2{
 }
 .taketopage:hover {
     background-color: #17494D;
+}
+.discover{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: auto;
+}
+.discoverCard{
+    margin: auto .4rem;
+    border-radius: 8px;
+}
+
+
+
+
+/* page control button  */
+.pageBTNcontiainer{
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+}
+.pageBTN{
+    color: white;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 50%;
+    background-color: transparent;
+}
+.pageBTN:hover {
+    background-color:#17494D;
 }
