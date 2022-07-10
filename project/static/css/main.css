@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+
+}
+:root{
+    --navBg: rgb(0, 0, 0);
+}
+html{
+    font-size: 10px;
+}
+body{
+    background-color: rgb(15, 15, 15);
+}
+/* animatoin   */
+.title-word {
+    animation: color-animation 4s linear infinite;
+}
+
+.title-word-1 {
+    --color-1: #DF8453;
+    --color-2: #3D8DAE;
+    --color-3: #E4A9A8;
+}
+
+.title-word-2 {
+    --color-1: #DBAD4A;
+    --color-2: #ACCFCB;
+    --color-3: #17494D;
+}
+.title-word-3 {
+    --color-1: #ACCFCB;
+    --color-2: #E4A9A8;
+    --color-3: #ACCFCB;
+}
+@keyframes color-animation {
+    0% {
+        color: var(--color-1)
+    }
+
+    32% {
+        color: var(--color-1)
+    }
+
+    33% {
+        color: var(--color-2)
+    }
+
+    65% {
+        color: var(--color-2)
+    }
+
+    66% {
+        color: var(--color-3)
+    }
+
+    99% {
+        color: var(--color-3)
+    }
+
+    100% {
+        color: var(--color-1)
+    }
+}
+
+/* Here are just some visual styles. 🖌 */
+
+.headTitle {
+    display: grid;
+    place-items: left;
+    text-align: left;
+}
+
+.title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 8.5vw;
+    text-transform: uppercase;
+}
+/* common */
+.hlogo{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+input[type="text"]{
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+/* vertical line */
+/* scrolbar  */
+::-webkit-scrollbar{
+    width: .5rem;
+    height: .3rem;
+}
+::-webkit-scrollbar-track{
+    border-radius: 100vw;
+    margin-block: .5rem;
+}
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(90deg, rgba(255, 0, 78, 1) 0%, rgba(157, 13, 161, 1) 45%, rgba(0, 212, 255, 1) 100%);
+        border-radius: 100vw;
+        margin-block: .5rem;
+}::-webkit-scrollbar-thumb:hover     {
+    background-color: rgb(109, 109, 109);
+}
+/* navigation bar  */
+nav{
+    background-color: var(--navBg);
+    position: relative;
+    height: 5.2rem;
+    width: 100vw;
+    z-index: 1;
+}
+.nav{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+nav #logo{
+font-family: 'Black Ops One';
+font-size: 2.7rem;
+margin: 1rem;
+}
+#nav-right{
+    display: flex;
+    justify-self: right;
+    height: 100%;
+    align-items: center;
+    width: fit-content;
+}
+#nav-right a{
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: rgb(255, 255, 255);
+    padding: 1.2rem 1.5rem;
+    transition: background-color 50ms ease ;
+}
+#nav-right a:hover{
+    background-color: rgb(152, 155, 158);
+}
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.search i{
+    color: white;
+}
+.search button{
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 100vh;
+    transition: background-color 100ms ease-in-out ;
+}
+.search button:hover{
+    background-color: rgb(95, 89, 89);
+}
+#search{
+    background-color: rgba(255, 255, 255, 0.192) ;
+    width: 13rem;
+    transition: background-color 200ms ease-in-out, width 100ms ease-in-out;;
+}
+#search:hover{
+    background-color: rgba(138, 130, 130, 0.397);
+    width: 20rem;
+}
+
+/* body of home */
+.homeContainer{
+    height: max-content;
+    width: 100vw;
+}
+#imgSubmit{
+    background-color: transparent;
+}
+.trending{
+    margin: 1rem auto 2rem auto;
+    width: 99%;
+    /* border: 2px solid rgb(128, 0, 0); */
+    border-radius: 8px;
+    border-style: double;
+    justify-content: space-between;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: .4rem;
+    display: flex;
+}
+.card{
+    margin: auto .4rem;
+    border-radius: 8px;
+}
+.card:hover{
+    border: .08rem solid rgb(255, 255, 255);
+}
+h2{
+    font-size: 3rem;
+    margin: 1rem;
+    color: white;
+    text-decoration:solid ;
+}
+.trendingCard{
+    border-radius: 8px;
+    width: 18.5rem;
+    height: 27.8rem;
+    margin: auto .5rem;
+}
+.taketopage {
+    font-size: 1.6rem;
+    text-decoration: none;
+    margin: auto 1rem;
+    padding: 2rem;
+    color: white;
+    border-radius: 100vh;
+}
+.taketopage:hover {
+    background-color: #17494D;
+}
