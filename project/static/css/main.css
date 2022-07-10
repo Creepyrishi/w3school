@@ -173,6 +173,7 @@ margin: 1rem;
 #search:hover{
     background-color: rgba(138, 130, 130, 0.397);
     width: 20rem;
+    color: white;
 }
 
 /* body of home */
