@@ -7,9 +7,9 @@ app = Flask(__name__)
 pack = pack()
 
 @app.route("/")
+@app.route("/home")
 def home():
     poster = pack.home()
-    print(poster)
     return render_template("index.html", poster = poster)
 
 # discover
@@ -49,7 +49,10 @@ def search():
     adult='false'
     data = pack.search(query, page, adult)
     return render_template("search.html", list = data, query= query)
-
+#about
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 if __name__ == "__main__": 
     app.run(debug=True, port=9999)
