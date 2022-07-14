@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-{% block name %}
-- {{query}}
-{% endblock %}
+<!-- title  -->
+{% block name %} - Discover {% endblock %}
+
+<!-- content  -->
 {% block content %}
 <div class="discover ">
-    <h2 class="heading">Showing the result ~ {{query}}</h2>
+    <h2 class="heading">Discover</h2>
     
         <div class="cardContainer">
             {% for item in list %}
@@ -17,5 +18,10 @@
             {% endfor %}
         </div>
     
+</div>
+<div class="pageContainer">
+    <a href="/discover-" class="prevPage"><i class="fa-solid fa-arrow-left"></i></a>
+    <p>{{page}}</p>
+    <a href="/discover+" class="nxtPage"><i class="fa-solid fa-arrow-right"></i></a>
 </div>
 {% endblock %}

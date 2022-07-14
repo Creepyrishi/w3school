@@ -1,59 +1,15 @@
-<!-- FORMAT OF LIST AND RECO 
-    [{
-'title': title,
-"id": id,
-"poster": poster
-}]-->
 {% extends 'base.html' %}
 {% block content %}
-<div class="homeContainer">
-    <div class="headTitle">
-        <h2> <span class="title-word title-word-1">Trending</span> <span class="title-word title-word-2">Today</span>
-        </h2>
-    </div>
 
-    <div class="trending">
-        {% for item in list %}
-        <!-- "list" contain movies that are trending today -->
-        <a href="/ShowMovie/{{item['id']}}">
-            <div class="card">
-                <img src="{{item['poster']}}" alt="poster" class="trendingCard" id="{{item['id']}}">
-            </div>
-        </a>
-        {% endfor %}
-        <a href="/trending" class="taketopage">Trending <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-    <div class="headTitle">
-        <h2> <span class="title-word title-word-1">Trending</span> <span class="title-word title-word-2">This</span>
-            <span class="title-word title-word-3">Week</span></h2>
-    </div>
-    <div class="trending">
-        {% for item in reco %}
-        <!-- "reco" contain movies that are trending today-->
-        <a href="/ShowMovie/{{item['id']}}">
-            <div class="card">
-                <img src="{{item['poster']}}" alt="poster" class="trendingCard" id="{{item['id']}}">
-            </div>
-        </a>
-        {% endfor %}
-        <a href="/trending" class="taketopage">Trending <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-    <div class="headTitle">
-        <h2> <span class="title-word title-word-1">Discover</span></h2>
-    </div>
-    <div class="discover">
-        {% for item in discover %}
-        <a href="/ShowMovie/{{item['id']}}">
-            <div class="discoverCard">
-                <img src="{{item['poster']}}" alt="poster" class="trendingCard" id="{{item['id']}}">
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-    <div class="pageBTNcontiainer">
-    <button onclick="window.location.href='/page-'" class="pageBTN"><i class="fa-solid fa-arrow-left"></i></button>
-    <p>{{page}}</p>
-    <button onclick="window.location.href='/page+'" class="pageBTN"><i class="fa-solid fa-arrow-right"></i></button>
+<div id="indexContainer" style="background-image: url({{poster}}); background-repeat: no-repeat;
+    background-size: cover;">
+    <div id="searchContainer">
+        <form action="/search" method="post">
+            <input type="text" name="Search" id="searchTextbox" placeholder="Movies | Series | TV Shows | Animes | Person" required>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </form>
     </div>
 </div>
+    
 {% endblock %}

@@ -1,113 +1,129 @@
-from ast import DictComp
-from turtle import back
 import requests
 from decouple import config
 
 #getting enviroment variable
 key = config('mdbKey')
 
-class movies():
+# function to check data is movie or series 
+def check(value):
+    if "seasons" in value:
+        return True
+    else:
+        return False
+    
+# funciton to extract Name of series or movie 
+def name(value):
+    if "original_name" in value:
+            return value['original_name']
+    elif "original_title" in value:
+            return value['original_title']
+    elif "name" in value:
+            return value['name']
+    else:
+            return None
+
+
+
+
+class pack():
     def __init__(self):
         pass
-
-    def discover(self, page):
-        url = f"https://api.themoviedb.org/3/discover/movie?api_key={key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={page}&with_watch_monetization_types=flatrate"
-        r = requests.get(url).json()['results']
-        movieList =[]
-        for p in r:
-            id = p['id']
-            poster = f"https://image.tmdb.org/t/p/w220_and_h330_face{p['poster_path']}" #converting the image path into full url 
-            if 'original_title' in p:
-                title = p['original_title']
-            elif 'original_name' in p:
-                title = p['original_name']
-            else:
-                title = 'Null'
-            dict = {
-                'title': title,
-                "id": id,
-                "poster": poster
-            }
-            movieList.append(dict)
-        return movieList
-
     
-    def trendingToday(self):
+    #return backposter of most most popular show or movie of today for home page
+    def home(self):
         url = f"https://api.themoviedb.org/3/trending/all/day?api_key={key}"
-        popular = requests.get(url).json()['results']
-        movieList =[]
-        for p in popular:
-            id = p['id']
-            poster = f"https://image.tmdb.org/t/p/w220_and_h330_face{p['poster_path']}" #converting the image path into full url 
-            if 'original_title' in p:
-                title = p['original_title']
-            elif 'original_name' in p:
-                title = p['original_name']
-            else:
-                title = 'Null'
-            dict = {
-                'title': title,
-                "id": id,
-                "poster": poster
-            }
-            movieList.append(dict)
-        return movieList
+        r = requests.get(url)
+        poster = r.json()['results'][0]['backdrop_path']
+        poster= f"https://image.tmdb.org/t/p/original{poster}" #creating full url from path
+        return poster
 
-    def trendingWeek(self):
-        url = f"https://api.themoviedb.org/3/trending/all/week?api_key={key}"
-        popular = requests.get(url).json()['results']
-        movieList =[]
-        for p in popular:
-            id = p['id']
-            poster = f"https://image.tmdb.org/t/p/w220_and_h330_face{p['poster_path']}" #converting the image path into full url 
-            if 'original_title' in p:
-                title = p['original_title']
-            elif 'original_name' in p:
-                title = p['original_name']
-            else:
-                title = 'Null'
-            dict = {
-                'title': title,
-                "id": id,
-                "poster": poster
-            }
-            movieList.append(dict)
-        return movieList
-
-    def get_by_id(self,id):
-        url = f'https://api.themoviedb.org/3/movie/{id}?api_key={key}'
-        p = requests.get(url).json()
-        id = p['id']
-        poster = f"https://image.tmdb.org/t/p/w220_and_h330_face{p['poster_path']}" #converting the image path into full url 
-        back = f"https://image.tmdb.org/t/p/w220_and_h330_face{p['backdrop_path']}"
-        description = p['overview']
-        production_company = p['production_companies']
-        release_date = p['release_date']
-        revenue = p['revenue']
-        genres = p['genres']
-        budget =p['budget']
-        imdb = f"https://www.imdb.com/title/{p['imdb_id']}/"
-        spoken_languages = p['spoken_languages']
-        if 'original_title' in p:
-                title = p['original_title']
-        elif 'original_name' in p:
-                title = p['original_name']
-        else:
-                title = 'Null'
-        production_countries = p['production_countries']
-        dict = {
-                'title': title,
-                "id": id,
+    def discover(self, page=1):
+        url = "https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_watch_monetization_types=flatrate".format(key,page)
+        r = requests.get(url)
+        try:
+            list = []
+            data = r.json()['results']
+            for i in data:
+                id = i['id']
+                title = name(i)
+                poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{i['backdrop_path']}" #creating full url from path
+                series = check(i)
+                dict ={
+                "id":id,
+                "title": title,
                 "poster": poster,
-                "back_poster": back,
-                "description": description,
-                "production_company": production_company,
-                "production_countries": production_countries,
-                "release_date": release_date,
-                "revenue":revenue,
-                "genres" : genres,
-                "budget" : budget,
-                "imdb" : imdb,
-                "spoken_languages" : spoken_languages
+                "series" :series,
+                }
+                list.append(dict)
+        except Exception as e:
+            dict = {
+                "error": e
             }
-        return dict
+            list.append(dict)
+        finally:
+            return list
+    
+    def trending(self, val, page=1):
+        url = "https://api.themoviedb.org/3/trending/all/day?api_key={}&page={}".format(key,page)          
+        r = requests.get(url)
+        try:
+            list = []
+            data = r.json()['results']
+            for i in data:
+                id = i['id']
+                title = name(i)
+                poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{i['backdrop_path']}" #creating full url from path
+                series = check(i)
+                dict ={
+                        "id":id,
+                        "title": title,
+                        "poster": poster,
+                        "series" :series,
+                    }
+                list.append(dict)
+        except Exception as e:
+            dict = {
+                        "error": e
+                    }
+            list.append(dict)
+        finally:
+            return list
+
+    def search(self,query=None, page=1, adult="true"):
+        url = "https://api.themoviedb.org/3/search/multi?api_key={}&language=en-US&query={}&page={}&include_adult={}".format(key, query, page,adult)          
+        r = requests.get(url)
+        try:
+            list = []
+            data = r.json()['results']
+            for i in data:
+                type = i["media_type"]
+                if not type == 'person':
+                    path=i['poster_path']
+                    if path == None:
+                        continue
+
+                    id = i['id']
+                    title = name(i)
+                    poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{i['poster_path']}" #creating full url from path
+                elif type == "person":
+                    id = i['id']
+                    path=i['profile_path']
+                    if path == None:
+                        continue
+                    poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{path}" #creating full url from path
+                    title = name(i)
+
+                dict ={
+                        "id":id,
+                        "title": title,
+                        "poster": poster,
+                        "type" : type,
+                    }
+                list.append(dict)
+        except Exception as e:
+            dict = {
+                        "error": e
+                    }
+            list.append(dict)
+        finally:
+            return list

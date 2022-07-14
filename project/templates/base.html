@@ -4,30 +4,36 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moviz {% block name %}  {% endblock %}</title>
+  <link rel="shortcut icon" href="https://media.discordapp.net/attachments/995145144900788224/996995234477113434/image_2022-07-14_100524239-removebg-preview_1.png" type="image/x-icon">
+  <!-- linking css for all pages  -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/nav.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/discover.css') }}">
+
+  <!-- importing icons from awsome fonts  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-<nav>
-<div class="nav">
-  <a href="/" class="hlogo"><h1 id="logo">Moviz</h1></a>
-  <div id="nav-right">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/trending" class="nav-link">Trending</a>
-    <a href="/latest" class="nav-link">Latest</a>
-    <div class="search">
-      <form action="action" class="form" id="searchdoem">
-        <input type="text" name="search" id="search" placeholder="Movie | Series | Keywords" required>
-        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
-    </div>
-  </div>
-</div>
-</nav>
-<title>Moviz{% block title %}{% endblock %}</title>
 </head>
-<body id="body">
+<body>
+  <header>
+    <nav>
+      <a href="/">
+      <h1><img
+        src="https://media.discordapp.net/attachments/995145144900788224/996995234477113434/image_2022-07-14_100524239-removebg-preview_1.png"
+        alt="">Moviz</h1></a>
+      <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/discover">Discover</a></li>
+        <li><a href="/trending">Trending</a></li>
+        <li><a href="#">Genre</a></li>
+        </ul>
+      <button><a href="/about">About</a></button>
+    </nav>
+  </header>
   {% block content %}
     
   {% endblock %}
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 </body>
 </html>

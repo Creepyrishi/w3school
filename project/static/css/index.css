@@ -1,0 +1,43 @@
+/* css for index.html  */
+#indexContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    opacity: .75;
+    background-position: center;
+}
+#searchContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vw;
+    border: 1px solid white;
+    width: 360px;
+    background-color: transparent;
+    opacity: 1;
+}
+#searchContainer:hover{
+    box-shadow: 0 .4rem 2rem rgb(255, 0, 0);
+}
+#searchContainer input[type=text]{
+    padding: 1rem 2rem;
+    border-radius: 100vw;
+    width: 280px;
+    background-color: transparent;
+    outline: none;
+}
+#searchContainer button[type=submit] {
+    background-color:transparent;
+    border-radius: 100vw;
+    padding: 1rem;
+}
+#searchContainer button[type=submit]:hover {
+    background-color: rgba(136, 132, 132, 0.5);
+}
+#searchContainer button i {
+    color: white;
+}
+
+/* responsiveness  */

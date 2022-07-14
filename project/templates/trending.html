@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}
+{% block name %}
 - Trending
 {% endblock %}
 {% block content %}
-<!-- code here  -->
+<div class="discover ">
+    <div class="top">
+        <h2 class="heading">Trending</h2>
+        <div class="dropdown">
+            <button type="submit"></button>
+        </div>
+    </div>
+    <div class="cardContainer">
+        {% for item in list %}
+        <a class="cardButton" href="/{{item['id']}}">
+            <div class="card">
+                <img src="{{item['poster']}}" alt="Poster">
+                <h3>{{item['title']}}</h3>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock %}

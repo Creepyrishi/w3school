@@ -1,0 +1,65 @@
+/* CSS FOR NAVIGATION BAR */
+
+nav{
+    background-color: var(--nav-bg);
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    text-align: center;
+    align-items: center;
+    z-index: 1;
+}
+nav * {
+    margin: .3rem 1.2rem;
+    font-size: 1.7rem;
+}
+nav h1{
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+nav img{
+    height: 2.6rem;
+}
+nav a{
+    text-decoration: none;
+    padding: .3rem .3rem;
+    color: white;
+    margin: 0;
+}
+nav a:hover {
+    color: rgb(107, 106, 106);
+}
+nav li{
+    display: inline-block;
+}
+nav button{
+    background-color: transparent;
+    border: 1px solid blue;
+    border-radius: 100vw;
+    width: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+nav button:hover {
+    background-color: blue;
+    box-shadow: 0 0 2rem  blue;
+}
+nav button a:hover{
+    color: white;
+}
+nav button a{
+    font-size: 1rem;
+}
+.active{
+    color: blue;
+}   
+
+footer{
+    z-index: 1;
+}
+/* responsiveness  */
+/* tablet */
+  

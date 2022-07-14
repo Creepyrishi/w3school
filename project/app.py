@@ -1,77 +1,54 @@
-from struct import pack
+
 from flask import Flask, render_template, url_for, request
-import movieapi
+from movieapi import pack
 app = Flask(__name__)
 
-pack = movieapi.movies() #instance for api
+# creating instance for movie api 
+pack = pack()
 
-pageNu = 1
-# next page 
-@app.route("/page+")
-def nextPage():
-    global pageNu
-    pageNu +=1
-    discover = pack.discover(pageNu)
-    #gettng list of full trending and making it shot
-    list =[] #movies trending today will add in this 
-    reco = [] #movies trending this week will add in this
-
-    for i in range(0,10):
-        list.append(pack.trendingToday()[i])
-        reco.append(pack.trendingWeek()[i])
-    return render_template("index.html", list = list, reco = reco , discover = discover, page=pageNu)
-#previous page
-@app.route("/page-")
-def previousPage():
-    global pageNu
-    pageNu -=1
-    discover = pack.discover(pageNu)
-    #gettng list of full trending and making it shot
-    list =[] #movies trending today will add in this 
-    reco = [] #movies trending this week will add in this
-
-    for i in range(0,10):
-        list.append(pack.trendingToday()[i])
-        reco.append(pack.trendingWeek()[i])
-    return render_template("index.html", list = list, reco = reco , discover = discover,  page=pageNu)
-
-#home page
 @app.route("/")
 def home():
-    global pageNu
-    pageNu =1
-    discover = pack.discover(pageNu)
-    #gettng list of full trending and making it shot
-    list =[] #movies trending today will add in this 
-    reco = [] #movies trending this week will add in this
+    poster = pack.home()
+    print(poster)
+    return render_template("index.html", poster = poster)
 
-    for i in range(0,10):
-        list.append(pack.trendingToday()[i])
-        reco.append(pack.trendingWeek()[i])
-    return render_template("index.html", list = list, reco = reco , discover = discover,  page=pageNu)
+# discover
+@app.route("/discover")
+def discover():
+    data = pack.discover(1)
+    return render_template("discover.html", list =data, page=1)
+#creatind two route to change page
+page = 1
+@app.route("/discover+")
+def discoverPlus():
+    global page
+    page += 1
+    data = pack.discover(page)
+    return render_template("discover.html", list =data, page=page)
 
-#trending page
+@app.route("/discover-")
+def discoverMin():
+    global page
+    if page>2:
+        page -= 1
+    else:
+        page=1
+    data = pack.discover(page)
+    return render_template("discover.html", list =data, page=page)
+#trending
 @app.route("/trending")
 def trending():
-    return render_template("trending.html")
-
-#latest page
-@app.route("/latest")
-def latest():
-    return render_template("latest.html")
-
-#search page
-@app.route("/search")
+    type='all'
+    data = pack.trending(type)
+    return render_template("trending.html", list =data)
+#search
+@app.route("/search", methods=['GET','POST'])
 def search():
-    return render_template("search.html")
-
-
-#working here
-@app.route("/ShowMovie/<string:n>")
-def show(n):
-    r = pack.get_by_id(int(n))
-    return render_template("showMovie.html", dict = r)
-
+    query = request.form['Search']
+    page=1
+    adult='false'
+    data = pack.search(query, page, adult)
+    return render_template("search.html", list = data, query= query)
 
 
 if __name__ == "__main__": 

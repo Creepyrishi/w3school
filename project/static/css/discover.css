@@ -1,0 +1,18 @@
+
+.discover{
+}
+.pageContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 7rem 0 2rem 0;
+}
+.pageContainer a{
+    padding: .5rem 2rem;
+    color: white;
+}
+.pageContainer a:hover {
+    color: rgb(202, 202, 202);
+}
+
