@@ -27,6 +27,8 @@
     width: 280px;
     background-color: transparent;
     outline: none;
+    color: rgb(255, 251, 0);
+    font-size: 1.3rem;
 }
 #searchContainer button[type=submit] {
     background-color:transparent;

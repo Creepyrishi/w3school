@@ -1,15 +1,11 @@
+
+from urllib.request import urlcleanup
+from click import secho
 import requests
 from decouple import config
 
 #getting enviroment variable
 key = config('mdbKey')
-
-# function to check data is movie or series 
-def check(value):
-    if "seasons" in value:
-        return True
-    else:
-        return False
     
 # funciton to extract Name of series or movie 
 def name(value):
@@ -21,9 +17,6 @@ def name(value):
             return value['name']
     else:
             return None
-
-
-
 
 class pack():
     def __init__(self):
@@ -37,8 +30,13 @@ class pack():
         poster= f"https://image.tmdb.org/t/p/original{poster}" #creating full url from path
         return poster
 
-    def discover(self, page=1):
-        url = "https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_watch_monetization_types=flatrate".format(key,page)
+    def discover(self,type, page=1):
+        if type == "tv":
+            url=f"https://api.themoviedb.org/3/discover/tv?api_key={key}&language=en-US&sort_by=popularity.desc&page={page}&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0"
+            series = True
+        else:
+            url = "https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_watch_monetization_types=flatrate".format(key,page)
+            series = False
         r = requests.get(url)
         try:
             list = []
@@ -47,7 +45,6 @@ class pack():
                 id = i['id']
                 title = name(i)
                 poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{i['backdrop_path']}" #creating full url from path
-                series = check(i)
                 dict ={
                 "id":id,
                 "title": title,
@@ -63,8 +60,14 @@ class pack():
         finally:
             return list
     
-    def trending(self, val, page=1):
-        url = "https://api.themoviedb.org/3/trending/all/day?api_key={}&page={}".format(key,page)          
+    def trending(self, time="day", media="movie", page=1):
+        # media -> which kind of media {movie, tvshow, all}
+        # time -> trending today or this week
+        url = f"https://api.themoviedb.org/3/trending/{media}/{time}?api_key={key}&page={page}"
+        if media == "tv":
+            series = True
+        else:
+            series = False
         r = requests.get(url)
         try:
             list = []
@@ -73,7 +76,6 @@ class pack():
                 id = i['id']
                 title = name(i)
                 poster= f"https://www.themoviedb.org/t/p/w220_and_h330_face/{i['backdrop_path']}" #creating full url from path
-                series = check(i)
                 dict ={
                         "id":id,
                         "title": title,
@@ -127,3 +129,10 @@ class pack():
             list.append(dict)
         finally:
             return list
+
+    def get(self, id, series):
+        if series == True:
+            url = f"https://api.themoviedb.org/3/tv/{id}?api_key={key}&language=en-US"
+        else:
+            url = f"https://api.themoviedb.org/3/movie/{id}?api_key={key}&language=en-US" 
+        print(url)

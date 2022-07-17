@@ -5,19 +5,37 @@
 <!-- content  -->
 {% block content %}
 <div class="discover ">
-    <h2 class="heading">Discover</h2>
-    
-        <div class="cardContainer">
-            {% for item in list %}
-            <a class="cardButton" href="/{{item['id']}}">
+    <h2 class="heading">Discover
+        <div class="dropdownContainer">
+            <div class="dropdown">
+                <button class="dropdown-head" onclick="dropdownType()">{{type}} <i
+                        class="fa-light fa-list-dropdown"></i></button>
+                <div class="dropdown-body" id="dropDownType">
+                    <form action="/discover" method="post" class="dropdown-item"><button type="submit" value="movie"
+                            name="media">Movie</button></form>
+                    <form action="/discover" method="post" class="dropdown-item"><button type="submit" value="tv"
+                            name="media">Series</button></form>
+                </div>
+            </div>
+        </div>
+</div>
+</h2>
+
+<div class="cardContainer">
+    {% for item in list %}
+    <a class="cardButton">
+        <form action="/get" method="post">
+            <button type="submit" value="{{item['series']}}/{{item['id']}}" name="get" class="getPagePostBtn">
                 <div class="card">
                     <img src="{{item['poster']}}" alt="Poster">
                     <h3>{{item['title']}}</h3>
                 </div>
-            </a>
-            {% endfor %}
-        </div>
-    
+            </button>
+        </form>
+    </a>
+    {% endfor %}
+</div>
+
 </div>
 <div class="pageContainer">
     <a href="/discover-" class="prevPage"><i class="fa-solid fa-arrow-left"></i></a>

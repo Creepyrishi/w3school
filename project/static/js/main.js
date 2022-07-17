@@ -12,3 +12,22 @@ const navLink = document.querySelectorAll('nav a').
             document.getElementById('homeA').classList.add('active')
         }
     })
+
+//visiblity of dropdown content
+function dropdown(dropdownBody){
+    if (window.getComputedStyle(dropdownBody).display === 'none') {
+        dropdownBody.style.display = "block";
+    }
+    else {
+        dropdownBody.style.display = "none";
+    }
+}
+
+function dropdownTime(){
+    dropdownBody = document.querySelector('#dropDownTime');
+    dropdown(dropdownBody);
+}
+function dropdownType() {
+    dropdownBody = document.querySelector('#dropDownType');
+    dropdown(dropdownBody);
+}

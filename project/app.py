@@ -1,10 +1,14 @@
-
 from flask import Flask, render_template, url_for, request
 from movieapi import pack
 app = Flask(__name__)
 
 # creating instance for movie api 
 pack = pack()
+
+#globals
+type = "day"
+media = "movie"
+
 
 @app.route("/")
 @app.route("/home")
@@ -13,34 +17,34 @@ def home():
     return render_template("index.html", poster = poster)
 
 # discover
-@app.route("/discover")
+@app.route("/discover", methods=['GET','POST'])
 def discover():
-    data = pack.discover(1)
-    return render_template("discover.html", list =data, page=1)
-#creatind two route to change page
-page = 1
-@app.route("/discover+")
-def discoverPlus():
-    global page
-    page += 1
-    data = pack.discover(page)
-    return render_template("discover.html", list =data, page=page)
-
-@app.route("/discover-")
-def discoverMin():
-    global page
-    if page>2:
-        page -= 1
-    else:
-        page=1
-    data = pack.discover(page)
-    return render_template("discover.html", list =data, page=page)
+    global type
+    global media    
+    try:
+        media = request.form['media']
+    except:
+        pass
+    
+    data = pack.discover(type=media,page=1)
+    return render_template("discover.html", list =data, page=1, time = type.upper(), type = media.upper())
 #trending
-@app.route("/trending")
+@app.route("/trending", methods=['GET','POST'])
 def trending():
-    type='all'
-    data = pack.trending(type)
-    return render_template("trending.html", list =data)
+    global type
+    global media
+    #for time{{  in first request it will set to day }}
+    try:
+        type = request.form['time']
+    except:
+        pass
+    #for media type{{  in first request it will set to movie }}
+    try:
+        media = request.form['media']
+    except:
+        pass
+    data = pack.trending(time=type,media=media,page=1)
+    return render_template("trending.html", list =data, time= type.upper(), type = media.upper())
 #search
 @app.route("/search", methods=['GET','POST'])
 def search():
@@ -49,6 +53,19 @@ def search():
     adult='false'
     data = pack.search(query, page, adult)
     return render_template("search.html", list = data, query= query)
+
+#get
+@app.route("/get", methods=['GET','POST'])
+def get():
+    get = request.form['get']
+    type, id = get.split("/")
+    if type == "False":
+        type=False
+    else:
+        type = True
+    data = pack.get(id = int(id), series = type)
+    return render_template("get.html")
+   
 #about
 @app.route("/about")
 def about():
