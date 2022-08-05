@@ -1,5 +1,8 @@
-from flask import Flask, render_template, url_for, request
-from movieapi import pack
+from flask import Flask, redirect, render_template, url_for, request
+from movieapi import *
+import random
+import requests
+
 app = Flask(__name__)
 
 # creating instance for movie api 
@@ -23,11 +26,22 @@ def discover():
     global media    
     try:
         media = request.form['media']
+        page = 1
     except:
         pass
-    
-    data = pack.discover(type=media,page=1)
-    return render_template("discover.html", list =data, page=1, time = type.upper(), type = media.upper())
+    try:
+        page = int(request.args.get('page'))
+    except:
+        page = 1
+    if page > 1:
+        previousPage = page - 1
+    else:
+        previousPage = 1
+    nextPage = page + 1
+
+    data = pack.discover(type=media,page=page)
+    return render_template("discover.html", list =data, page=page , previousPage = previousPage, nextPage = nextPage, time = type.upper(), type = media.upper())
+
 #trending
 @app.route("/trending", methods=['GET','POST'])
 def trending():
@@ -36,15 +50,27 @@ def trending():
     #for time{{  in first request it will set to day }}
     try:
         type = request.form['time']
+        page = 1
     except:
         pass
     #for media type{{  in first request it will set to movie }}
     try:
         media = request.form['media']
-    except:
+        page = 1
+    except:    
         pass
-    data = pack.trending(time=type,media=media,page=1)
-    return render_template("trending.html", list =data, time= type.upper(), type = media.upper())
+    try:
+        page = int(request.args.get('page'))
+    except:
+        page = 1
+    if page > 1:
+        previousPage = page - 1
+    else:
+        previousPage = 1
+    nextPage = page + 1
+
+    data = pack.trending(time=type,media=media,page=page)
+    return render_template("trending.html", list =data, page=page , previousPage = previousPage, nextPage = nextPage,time= type.upper(), type = media.upper())
 #search
 @app.route("/search", methods=['GET','POST'])
 def search():
@@ -60,16 +86,32 @@ def get():
     get = request.form['get']
     type, id = get.split("/")
     if type == "False":
-        type=False
-    else:
+        type = False
+    else:   
         type = True
-    data = pack.get(id = int(id), series = type)
-    return render_template("get.html")
-   
+    data = pack.get(id = int(id), series = type,)
+    #for no trailers
+    try:
+        trailerId = random.choice(data['trailerIdList'])
+    except:
+        trailerId = ''
+    return render_template(
+        "get.html", 
+        dict = data,
+        backdrop = data['backdrop'],
+        poster = data['poster'],
+        trailerId=trailerId
+    )
+# test
+@app.route("/test")
+def test():
+    return redirect("/home", code=302)
+
+
 #about
 @app.route("/about")
 def about():
     return render_template("about.html")
 
 if __name__ == "__main__": 
-    app.run(debug=True, port=9999)
+    app.run(debug=True, port=9999, host="localhost")

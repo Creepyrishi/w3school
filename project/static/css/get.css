@@ -1,0 +1,166 @@
+
+/* styling  */
+#backdropContainer{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-bottom-left-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    height: 60vh;
+    width: 100vw;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    box-shadow: inset 0rem 0rem 55rem rgb(0, 0, 0);
+}
+#posterImg{
+    height: 45vh;
+    border-radius: 10px;
+    transition: filter 150ms ease-in-out;
+}
+#trailerTriggerDiv{
+    transform: translateY(35vh);
+    height: 45vh;
+    border-radius: 10px;
+    box-shadow: .3rem 0rem 1.5rem rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#trailerTriggerDiv p {
+    position: absolute;
+    opacity: 0;
+    font-size: 2rem;
+    transition: opacity 150ms ease-in-out;
+}
+#trailerTriggerDiv:hover #posterImg{
+    filter: blur(3.5px);
+}
+#trailerTriggerDiv:hover #trailerP{
+    opacity: 100%;
+    text-shadow: 1px 1px black;
+}
+
+/* detail section */
+#detailContainer{
+    margin: 16rem auto 0 auto;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#detailContainer h1{
+    font-size: 4rem;
+    line-height: 6rem;
+    text-shadow:.4rem 1rem  black;
+}
+#detailContainer h2 {
+    font-size: 3rem;
+    line-height: 5rem;
+    text-shadow: .4rem .6rem black;
+}
+#detailContainer p {
+    font-size: 1.8rem;
+}
+.detailGenreContainer{
+    display: flex;
+    padding: 0.5rem auto;
+    margin: .2rem auto;
+    text-align: center;
+}
+.detailGenreContainer p{
+    line-height: 5.5rem;
+}
+.detailGenreContainer p a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.detailGenreContainer p a:hover{
+    color: rgb(220, 220, 220);
+}
+
+/* Casts and crew section  */
+.castContainer > h2{
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-top: 4rem;
+}
+
+/* company and country section  */
+.groupSection>h2 {
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-top: 4rem;
+}
+.company{
+    max-width: 98vw;
+    min-width: 22rem;
+    margin: 0 auto;
+    width: fit-content;
+    background-color: rgba(240, 248, 255, 0.297);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 10px;
+    align-items: center;
+    box-shadow: .3rem 0rem 1.5rem rgb(0, 0, 0);
+}
+
+.company > div > img{
+    width: 20rem;
+    max-height: 20rem;
+    margin: 1rem 3rem;
+    fill: white;
+}
+
+.country{
+    height: 40rem;
+    width: 49vw;
+    border: 1px solid red;
+}
+
+
+/* watchTrailerPopup  */
+
+#watchTrailerPopupContainer{
+    height: 100vh;
+    width: 100vw;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 150ms ease-in-out;
+}
+#watchTrailerPopup{
+    height: 90vh;
+    width: 84vw;
+    border-radius: 12px;
+    background-color: rgba(230, 224, 224, 0.638);
+    display: flex;
+}
+#trailerYoutube{
+    border-radius: 12px;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
+}
+#watchTrailerPopup #crossButton{
+    position: absolute;
+    background-color: rgb(80, 79, 77);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+#watchTrailerPopup #crossButton:hover{
+    background-color: rgb(64, 63, 61);
+}
+/* watchTrailerPopup ends */

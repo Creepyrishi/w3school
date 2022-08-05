@@ -8,6 +8,8 @@ nav{
     text-align: center;
     align-items: center;
     z-index: 1;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 nav * {
     margin: .3rem 1.2rem;
@@ -59,7 +61,4 @@ nav button a{
 
 footer{
     z-index: 1;
-}
-/* responsiveness  */
-/* tablet */
-  
+}  

@@ -1,7 +1,105 @@
 {% extends 'base.html' %}
+
 {% block name %}
-    - {{dict['title']}}
+- {{dict['title']}}
 {% endblock %}
+
 {% block content %}
 
+    <div id="backdropContainer" style="background-image: url({{backdrop}});">
+        <div id="trailerTriggerDiv">
+            <img id="posterImg" src="{{poster}}" onclick="setTrailerId('{{trailerId}}')" loading = "lazy">
+            <p id="trailerP">Watch Trailer</p>
+    </div>
+    </div>
+    <section id="detailContainer">
+        <h1>{{dict['title']}}</h1>
+        <div class="detailGenreContainer"> 
+            {% for item in (dict['genres']) %}
+                <p class="genreList">| <a href="#"  > {{item['name']}}</a> |</p>
+            {% endfor %}
+        </div>
+        <p id="overview">{{dict['overview']}}</p>
+    </section>
+    <section class="castContainer">
+        <!-- css for media is in main  -->
+        {% if dict['cast']| length > 0 %}
+        <h2>CASTS</h2>
+        <div class="meidaScollar">
+            {% for cast in dict['cast'] %}
+            <div class="mediaElement">
+                <img src="{{cast['picture']}}" alt="Failed" loading = "lazy">
+                <p>{{cast['character']}}</p>
+                <p>{{cast['name']}}</p>
+            </div>
+        
+            {% else %}
+            <p>No cast</p>
+            {% endfor %}
+        {% endif %}
+        
+        </div> 
+    </section>
+    <section class="groupSection">
+
+        <h2>PRODUCTION</h2>
+        <div class="company">
+            {% for item in dict['company'] %}
+                <div>
+                    <img src="{{item['logo']}}" alt="logo" loading = "lazy">
+                </div>
+            {% else %}
+                <p>No Data Here..</p>
+            {% endfor %}
+
+        </div>
+    </section>
+        <div class="seasons">
+            {% if (dict['series'] == True) %}
+                    <h2 class="mediaScrollHeader">SEASONS</h2>
+                    <div class="meidaScollar">
+                        {% for season in dict['seasons'] %}
+                        <div class="mediaElement">
+                            <img src="{{season['poster']}}" alt="Failed" loading = "lazy">
+                            <p>{{season['title']}}</p>
+                        </div>
+                    
+                        {% else %}
+                        <p>No Season</p>
+                        {% endfor %}
+                    </div>
+            {% endif %}
+        </div>
+
+
+        <!-- similar  -->
+        <h2 class="mediaScrollHeader">SIMILAR</h2>
+        <div class="cardContainer">
+            {% for item in dict["similar"] %}
+            <a class="cardButton">
+                <form action="/get" method="post">
+                    <button type="submit" value="{{item['series']}}/{{item['id']}}" name="get" class="getPagePostBtn">
+                        <div class="card">
+                            <img src="{{item['poster']}}" alt="Poster" loading = "lazy">
+                            <h3>{{item['title']}}</h3>
+                        </div>
+                    </button>
+                </form>
+            </a>
+            {% endfor %}
+        </div>
+
+
+
+
+
+    <!-- Watch trailer popup  -->
+    <div id="watchTrailerPopupContainer">
+        <div id="watchTrailerPopup">
+           <!-- html id added with js in setTrailerId() -->
+        </div>
+    </div>
+    
+
 {% endblock %}
+

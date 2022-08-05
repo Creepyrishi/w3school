@@ -27,7 +27,7 @@
         <form action="/get" method="post">
             <button type="submit" value="{{item['series']}}/{{item['id']}}" name="get" class="getPagePostBtn">
                 <div class="card">
-                    <img src="{{item['poster']}}" alt="Poster">
+                    <img src="{{item['poster']}}" alt="Poster" loading = "lazy">
                     <h3>{{item['title']}}</h3>
                 </div>
             </button>
@@ -37,9 +37,13 @@
 </div>
 
 </div>
+<!-- page increament and decreament system for this css is linked from discover.css -->
 <div class="pageContainer">
-    <a href="/discover-" class="prevPage"><i class="fa-solid fa-arrow-left"></i></a>
-    <p>{{page}}</p>
-    <a href="/discover+" class="nxtPage"><i class="fa-solid fa-arrow-right"></i></a>
+        <form action="/discover" method="get">
+            <button type="submit" value="{{previousPage}}" name="page" class="prevpage" style="background-color: transparent;"><i class="fa-solid fa-angle-left" style="color: white; font-size: 1.6rem; margin: .8rem;"></i></button>
+            <p>{{page}}</p>
+            <button type="submit" value="{{nextPage}}" name="page" class="nxtPage" style="background-color: transparent;"><i class="fa-solid fa-angle-right" style="color: white; font-size: 1.6rem;  margin: .8rem;"></i></button>
+        </form>
 </div>
+<!-- end page increament and decreament  -->
 {% endblock %}

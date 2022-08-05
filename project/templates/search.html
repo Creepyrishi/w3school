@@ -5,17 +5,21 @@
 {% block content %}
 <div class="discover ">
     <h2 class="heading">Showing the result ~ {{query}}</h2>
-    
-        <div class="cardContainer">
-            {% for item in list %}
-            <a class="cardButton" href="/{{item['id']}}">
+</div>
+
+<div class="cardContainer">
+    {% for item in list %}
+    <a class="cardButton">
+        <form action="/get" method="post">
+            <button type="submit" value="{{item['series']}}/{{item['id']}}" name="get" class="getPagePostBtn">
                 <div class="card">
-                    <img src="{{item['poster']}}" alt="Poster">
+                    <img src="{{item['poster']}}" alt="Poster" loading = "lazy">
                     <h3>{{item['title']}}</h3>
                 </div>
-            </a>
-            {% endfor %}
-        </div>
-    
+            </button>
+        </form>
+    </a>
+    {% endfor %}
 </div>
+
 {% endblock %}

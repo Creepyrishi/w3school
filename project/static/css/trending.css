@@ -17,6 +17,7 @@
     font-family: Arial, Helvetica, sans-serif;
     height: 3rem;
     transition: display 150ms ease-in-out;
+    color: red;
 }
 
 .dropdown button{
@@ -37,4 +38,3 @@
     border: 1px double blue;
     display: none;
 }
-
