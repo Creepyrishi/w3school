@@ -1,9 +1,12 @@
 from tkinter import simpledialog
 import requests
-from decouple import config
 
 #getting enviroment variable
-key = config('mdbKey')
+def config():
+    with open(".env", 'r') as f:
+        key = f.read().split("=")[1]
+        return key
+key = config()
 
 nullImg = "https://th.bing.com/th/id/R.76801db49ff2ab1c1c744116023144ca?rik=zINagHQZSPOU%2fw&riu=http%3a%2f%2fwww.selikoff.net%2fblog-files%2fnull-value.gif&ehk=cNq4qNJX05TgPMcuWYCuj%2f18PfoXbgy0X1B7lN8m1eU%3d&risl=&pid=ImgRaw&r=0"
 

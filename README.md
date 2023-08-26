@@ -1,4 +1,4 @@
-# w3school
+# movie
 Project for w3school event project
 
 <h1>HOW TO RUN:</h1>
@@ -14,3 +14,11 @@ Project for w3school event project
 <li>Remove space and quote marks before putting API key in to '.env'</li>
 <li>For production purpose do <code>debug = False</code></li>
 </ol>
+<h1>ScreenShots</h1>
+<ul>
+    <li><img src = "project/static/img/ss (1).png"/></li>
+    <li><img src = "project/static/img/ss (2).png"/></li>
+    <li><img src = "project/static/img/ss (2).png"/></li>
+    <li><img src = "project/static/img/ss (4).png"/></li>
+</ul>
+
